@@ -5,9 +5,9 @@ namespace :deploy do
       on roles(:web) do
         within release_path do
           execute "mkdir -p #{shared_path}/build/"
-          execute "cp -r #{shared_path}/build/ #{release_path}/build"
+          execute "cp -r #{shared_path}/build #{release_path}/build"
           execute :bundle, 'exec middleman build'
-          execute "cp -r #{release_path}/build/ #{shared_path}/build"
+          execute "cp -r #{release_path}/build #{shared_path}/build"
         end
       end
     end
