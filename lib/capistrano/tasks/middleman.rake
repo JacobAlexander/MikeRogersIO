@@ -7,7 +7,7 @@ namespace :deploy do
           last_release = capture(:ls, "-xt", releases_path).split.first
           last_release_path = releases_path.join(last_release)
           FileUtils.mkdir(release_path.join('build'))
-          FileUtils.cp_r(last_release_path.join('build'), release_path.join('build'))
+          FileUtils.cp_r(last_release_path.join('build'), release_path.join('build/'))
           execute :bundle, 'exec middleman build'
         end
       end
