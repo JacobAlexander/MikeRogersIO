@@ -4,6 +4,7 @@ namespace :deploy do
     task :build do
       on roles(:web) do
         within release_path do
+          run "cp -r #{previous_release}/build #{release_path}/build/"
           execute :bundle, 'exec middleman build'
         end
       end
@@ -16,7 +17,7 @@ namespace :deploy do
   task :invalidating_cdn do
     on roles(:web) do
       within release_path do
-        execute :bundle, 'exec middleman cdn'
+        #execute :bundle, 'exec middleman cdn'
       end
     end
   end
@@ -26,7 +27,7 @@ namespace :deploy do
   task :sitemap_ping do
     on roles(:web) do
       within release_path do
-        execute :bundle, 'exec middleman sitemap_ping'
+        #execute :bundle, 'exec middleman sitemap_ping'
       end
     end
   end
