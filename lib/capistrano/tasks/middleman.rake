@@ -3,8 +3,8 @@ namespace :deploy do
     desc 'Build site on the server'
     task :build do
       on roles(:web) do
-        run "cp -r #{shared_path}/build #{release_path}/build/"
         within release_path do
+          run "cp -r #{current_path}/build #{release_path}/build/"
           execute :bundle, 'exec middleman build'
         end
       end
