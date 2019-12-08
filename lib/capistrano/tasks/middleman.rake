@@ -4,8 +4,10 @@ namespace :deploy do
     task :build do
       on roles(:web) do
         within release_path do
-          FileUtils.cp_r(shared_path.join('build/'), release_path.join('build/'))
+          execute "mkdir -p #{shared_path}/build/"
+          execute "cp -r #{shared_path}/build/ #{release_path}/build"
           execute :bundle, 'exec middleman build'
+          execute "cp -r #{release_path}/build/ #{shared_path}/build"
         end
       end
     end
